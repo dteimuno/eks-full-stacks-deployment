@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::211125652131:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/273C008683F41925A217FBD9706090C8"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.us-east-1.amazonaws.com/id/273C008683F41925A217FBD9706090C8:sub": "system:serviceaccount:luit:luitsa"
+        }
+      }
+    }
+  ]
+}
