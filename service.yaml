@@ -4,8 +4,9 @@ metadata:
   name: luitservice
   namespace: luit
 spec:
+  type: LoadBalancer
   selector:
-    app: nginx
+    app: apache
   ports:
     - protocol: TCP
       port: 80

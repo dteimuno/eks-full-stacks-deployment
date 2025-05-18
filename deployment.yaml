@@ -1,25 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: apache-deployment
   labels:
-    app: nginx
+    app: apache
   namespace: luit
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: nginx
+      app: apache
   template:
     metadata:
       labels:
-        app: nginx
+        app: apache
     spec:
-      serviceAccountName: luitsa
       containers:
       - name: nginx
-        image: public.ecr.aws/nginx/nginx:stable-perl
-        command: ["sh", "-c", "touch /tmp/healthy && nginx -g 'daemon off;'"]
+        image: public.ecr.aws/docker/library/httpd:latest
+        command: ["sh", "-c", "touch /tmp/healthy && httpd-foreground"]
         livenessProbe:
           exec:
             command:
@@ -43,20 +42,3 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 80
-        env:
-        - name: NGINX_HOST
-          value: "nginx.example.com"
-        - name: NGINX_PORT
-          value: "80"
-        volumeMounts:
-        - name: efs-pv
-          mountPath: /usr/share/nginx/html
-          readOnly: true
-        - name: nginx-cache
-          mountPath: /var/cache/nginx
-      volumes:
-      - name: efs-pv
-        persistentVolumeClaim:
-          claimName: efs-pvc  
-      - name: nginx-cache
-        emptyDir: {}
