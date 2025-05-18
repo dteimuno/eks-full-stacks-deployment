@@ -1,0 +1,9 @@
+variables.tf
+.terraform/
+*.hcl
+*.tfstate
+*.json
+volume.yaml
+ingress.yaml
+pvc.yaml
+storage-class.yaml
