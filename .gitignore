@@ -4,6 +4,6 @@ variables.tf
 *.tfstate
 *.json
 volume.yaml
-ingress.yaml
-pvc.yaml
-storage-class.yaml
+*ingress.yaml
+*pvc.yaml
+*storage-class.yaml
